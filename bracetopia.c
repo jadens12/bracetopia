@@ -31,20 +31,20 @@ struct vacantSpots{
 // Displays the standard usage message
 void displayUsage(){
     fprintf(stderr, "usage: \n");
-    fprintf(stderr, "bracetopia [-h] [-t N] [-c N] [-d dim] [-s %%str] [-v %%vac    ] [-e %%end] \n");
+    fprintf(stderr, "bracetopia [-h] [-t N] [-c N] [-d dim] [-s %%str] [-v %%vac] [-e %%end] \n");
 }
 
 // Displays the help messages
 void displayHelp(){
     displayUsage();
     fprintf(stderr, "Option      Default   Example   Description\n");
-    fprintf(stderr, "'-h'        NA        -h        print this usage message.\n"    );
-    fprintf(stderr, "'-t N'      900000    -t 5000   microseconds cycle delay.\n"    );
-    fprintf(stderr, "'-c N'      NA        -c4       count cycle maximum value.\n    ");
-    fprintf(stderr, "'-d dim'    15        -d 7      width and height dimension.\    n");
-    fprintf(stderr, "'-s %%str'   50        -s 30     strength of preference.\n")    ;
+    fprintf(stderr, "'-h'        NA        -h        print this usage message.\n");
+    fprintf(stderr, "'-t N'      900000    -t 5000   microseconds cycle delay.\n");
+    fprintf(stderr, "'-c N'      NA        -c4       count cycle maximum value.\n");
+    fprintf(stderr, "'-d dim'    15        -d 7      width and height dimension.\n");
+    fprintf(stderr, "'-s %%str'   50        -s 30     strength of preference.\n");
     fprintf(stderr, "'-v %%vac'   20        -v30      percent vacancies.\n");
-    fprintf(stderr, "'-e %%endl'  60        -e75      percent Endline braces. Oth    ers want Newline.\n");
+    fprintf(stderr, "'-e %%endl'  60        -e75      percent Endline braces. Others want Newline.\n");
 }
 
 /*
@@ -278,7 +278,7 @@ void finiteMode(){
         movesMade = 0;
         avgHappiness = happiness / (DIM * DIM - numV);
         printf("teams' \"happiness\": %.4f\n", avgHappiness);
-        printf("dim: %d, %%strength of preference:  %d%%, %%vacancy:  %d%%, %%end    :  %d%%\n", DIM, thresholdPercent, vPercent, ePercent);
+        printf("dim: %d, %%strength of preference:  %d%%, %%vacancy:  %d%%, %%end:  %d%%\n", DIM, thresholdPercent, vPercent, ePercent);
         cycles--;
         movesMade = makeMove(grid, Hgrid, numV);
     }
@@ -330,7 +330,7 @@ void infiniteMode(){
         movesMade = 0;
         avgHappiness = happiness / (DIM * DIM - numV);
         printw("teams' \"happiness\": %.4f\n", avgHappiness);
-        printw("dim: %d, %%strength of preference:  %d%%, %%vacancy:  %d%%, %%end    :  %d%%\n", DIM, thresholdPercent, vPercent, ePercent);
+        printw("dim: %d, %%strength of preference:  %d%%, %%vacancy:  %d%%, %%end:  %d%%\n", DIM, thresholdPercent, vPercent, ePercent);
         printw("Use Control-C to quit.\n");
         refresh();
         usleep(sleepDelay);
@@ -354,12 +354,12 @@ int main(int argc, char* argv[]){
             case 'd':
                 num = (int)strtol(optarg, NULL, 10);
                 if (num <=0){
-                    fprintf(stderr, "dimension (%d) must be a non-negative intege    r.\n)", num);
+                    fprintf(stderr, "dimension (%d) must be a non-negative integer.\n)", num);
                     displayUsage();
                     return (1 + EXIT_FAILURE);
                 }
                 else if (num <5 || num > 39){
-                    fprintf(stderr, "dimension (%d) must be a value in [5...39]\n    ", num);
+                    fprintf(stderr, "dimension (%d) must be a value in [5...39]\n", num);
                     displayUsage();
                     return (1 + EXIT_FAILURE);
                 }
@@ -368,12 +368,12 @@ int main(int argc, char* argv[]){
             case 's':
                 num = (int)strtol(optarg, NULL, 10);
                 if (num <0){
-                    fprintf(stderr, "preference strength (%d) must be a non-negat    ive integer.\n", num);
+                    fprintf(stderr, "preference strength (%d) must be a non-negative integer.\n", num);
                     displayUsage();
                     return (1 + EXIT_FAILURE);
                 }
                 else if (num == 0|| num >= 100){
-                    fprintf(stderr, "preference strength (%d) must be a value in     [1...99]\n", num);
+                    fprintf(stderr, "preference strength (%d) must be a value in [1...99]\n", num);
                     displayUsage();
                     return (1 + EXIT_FAILURE);
                 }
@@ -382,12 +382,12 @@ int main(int argc, char* argv[]){
             case 'v':
                 num = (int)strtol(optarg,NULL,10);
                 if (num <0){
-                    fprintf(stderr, "Vacancy (%d) must be a non-negative integer.    \n", num);
+                    fprintf(stderr, "Vacancy (%d) must be a non-negative integer.\n", num);
                     displayUsage();
                     return (1 + EXIT_FAILURE);
                 }
                 else if (num == 0 || num >=100){
-                    fprintf(stderr, "vacancy (%d) must be a value in [1...99]\n",     num);
+                    fprintf(stderr, "vacancy (%d) must be a value in [1...99]\n", num);
                     displayUsage();
                     return (1 + EXIT_FAILURE);
                 }
@@ -396,12 +396,12 @@ int main(int argc, char* argv[]){
             case 'e':
                 num = (int)strtol(optarg, NULL, 10);
                 if (num <0){
-                    fprintf(stderr, "Endline proportion (%d) must be a non-negati    ve integer.\n", num);
+                    fprintf(stderr, "Endline proportion (%d) must be a non-negative integer.\n", num);
                     displayUsage();
                     return (1 + EXIT_FAILURE);
                 }
                 else if (num == 0 || num >=100){
-                    fprintf(stderr, "Endline proportion (%d) must be a value in [    1...99]\n", num);
+                    fprintf(stderr, "Endline proportion (%d) must be a value in [1...99]\n", num);
                     displayUsage();
                     return (1 + EXIT_FAILURE);
                 }
@@ -410,7 +410,7 @@ int main(int argc, char* argv[]){
             case 'c':
                 num = (int)strtol(optarg, NULL, 10);
                 if (num < 0){
-                    fprintf(stderr, "Cycles (%d) must be a non-negative integer.\    n", num);
+                    fprintf(stderr, "Cycles (%d) must be a non-negative integer.\n", num);
                     displayUsage();
                     return (1 + EXIT_FAILURE);
                 }
